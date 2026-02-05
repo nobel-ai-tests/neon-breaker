@@ -12,6 +12,8 @@ canvas.height = 800;
 let score = 0;
 let lives = 3;
 let gameRunning = true;
+let rightPressed = false;
+let leftPressed = false;
 
 const paddle = {
     width: 100,
@@ -143,7 +145,11 @@ function collisionDetection() {
 }
 
 function movePaddle() {
-    // Mouse interaction is handled by event listener
+    if (rightPressed && paddle.x < canvas.width - paddle.width) {
+        paddle.x += paddle.speed;
+    } else if (leftPressed && paddle.x > 0) {
+        paddle.x -= paddle.speed;
+    }
 }
 
 function moveBall() {
@@ -208,6 +214,22 @@ document.addEventListener('mousemove', e => {
     }
 });
 
+document.addEventListener('keydown', e => {
+    if (e.key === 'Right' || e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+        rightPressed = true;
+    } else if (e.key === 'Left' || e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+        leftPressed = true;
+    }
+});
+
+document.addEventListener('keyup', e => {
+    if (e.key === 'Right' || e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+        rightPressed = false;
+    } else if (e.key === 'Left' || e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+        leftPressed = false;
+    }
+});
+
 restartBtn.addEventListener('click', restartGame);
 
 function update() {
@@ -220,6 +242,7 @@ function update() {
     drawParticles();
     
     collisionDetection();
+    movePaddle();
     moveBall();
     updateParticles();
 
