@@ -28,8 +28,8 @@ const ball = {
     radius: 8,
     x: canvas.width / 2,
     y: canvas.height - 50,
-    dx: 4,
-    dy: -4,
+    dx: 3,
+    dy: -3,
     color: '#fff'
 };
 
@@ -167,8 +167,8 @@ function moveBall() {
             let collidePoint = ball.x - (paddle.x + paddle.width / 2);
             collidePoint = collidePoint / (paddle.width / 2);
             const angle = collidePoint * Math.PI / 3;
-            ball.dx = 7 * Math.sin(angle);
-            ball.dy = -7 * Math.cos(angle);
+            ball.dx = 5 * Math.sin(angle);
+            ball.dy = -5 * Math.cos(angle);
         } else {
             lives--;
             livesEl.innerText = `Lives: ${lives}`;
@@ -184,8 +184,8 @@ function moveBall() {
 function resetBall() {
     ball.x = canvas.width / 2;
     ball.y = canvas.height - 50;
-    ball.dx = 4;
-    ball.dy = -4;
+    ball.dx = 3;
+    ball.dy = -3;
     paddle.x = (canvas.width - paddle.width) / 2;
 }
 
